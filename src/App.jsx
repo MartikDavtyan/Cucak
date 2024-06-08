@@ -9,6 +9,7 @@ function App() {
 
   return (
     <>
+      <h1>TodoList</h1>
       <Cucak />
     </>
   )

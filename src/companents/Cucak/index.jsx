@@ -1,31 +1,48 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
 import '../../css/Cucak/cucak.css';
-import CucakEl from './cucakEl';
+import CucakElement from './cucakEl';
 
-export default function Index() {
-  const [cucak, setCucak] = useState([]);
+const CucakIndex = () => {
+  const [cucak, setCucak] = useState(JSON.parse(localStorage.getItem('cucak')));
+  const inputRef = useRef(null);
 
   const handleAddCucak = () => {
-    const value = document.querySelector('input').value;
-    if(value != ''){
-      document.querySelector('.i').value = '';
-      setCucak([...cucak, value]);
-    }else setCucak([...cucak]);
+    const inputValue = inputRef.current.value.trim();
+    if (inputValue !== '') {
+      const updatedCucak = [...cucak, inputValue];
+      localStorage.setItem('cucak', JSON.stringify(updatedCucak));
+      setCucak(updatedCucak);
+      inputRef.current.value = '';
+    }
+  };
+
+  const handleDelete = (index) => {
+    const updatedCucak = cucak.filter((_, i) => i !== index);
+    localStorage.setItem('cucak', JSON.stringify(updatedCucak));
+    setCucak(updatedCucak);
   };
 
   return (
     <div className="cucak">
       <div className="input">
-        <input className='i' type="text" />
+        <input className="i" type="text" ref={inputRef} />
         <button onClick={handleAddCucak} className="b">
           Add
         </button>
       </div>
       <div className="elements">
         {cucak.map((el, index) => (
-          <CucakEl key={index} text={el} />
+          <CucakElement key={index} text={el} onDelete={() => handleDelete(index)} />
         ))}
       </div>
     </div>
   );
-}
+};
+
+CucakIndex.propTypes = {
+  text: PropTypes.string,
+  i: PropTypes.number,
+};
+
+export default CucakIndex;
