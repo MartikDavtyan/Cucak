@@ -27,7 +27,7 @@ const CucakIndex = () => {
     <div className="cucak">
       <div className="input">
         <input className="i" type="text" ref={inputRef} />
-        <button onClick={handleAddCucak} className="b">
+        <button onClick={handleAddCucak} className="bu">
           Add
         </button>
       </div>
