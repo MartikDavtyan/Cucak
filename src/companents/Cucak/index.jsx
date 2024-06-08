@@ -7,8 +7,10 @@ export default function Index() {
 
   const handleAddCucak = () => {
     const value = document.querySelector('input').value;
-    document.querySelector('.i').value = '';
-    setCucak([...cucak, value]);
+    if(value != ''){
+      document.querySelector('.i').value = '';
+      setCucak([...cucak, value]);
+    }else setCucak([...cucak]);
   };
 
   return (
