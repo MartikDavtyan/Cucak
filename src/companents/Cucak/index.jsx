@@ -40,9 +40,5 @@ const CucakIndex = () => {
   );
 };
 
-CucakIndex.propTypes = {
-  text: PropTypes.string,
-  i: PropTypes.number,
-};
 
 export default CucakIndex;
